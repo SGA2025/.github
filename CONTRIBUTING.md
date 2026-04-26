@@ -41,6 +41,31 @@ engagement report.
 | Architecture decisions | Owner (sometimes assisted by Cascade) |
 | Documentation drafting | Cascade or Devin |
 
+### Complementary Review Roles
+
+When Cascade and Devin both review a change, their focus areas should
+**complement, not duplicate**:
+
+| Reviewer | Primary focus | Strength |
+|----------|---------------|----------|
+| **Devin** | Architectural correctness, security implications, whether config achieves its stated goal | Independent reasoning from first principles |
+| **Cascade** | Literal plan compliance, field-by-field diff against spec, deviations from documented decisions | Knows the plan line-by-line (often as author) |
+
+Why this matters:
+
+- A reviewer is **more likely** to catch deviations that **contradict** their own reasoning
+- A reviewer is **less likely** to catch deviations that **align** with their own reasoning (cognitive framing bias)
+- Two reviewers with different mental models catch different deviations; neither alone is sufficient
+
+**Reference case (2026-04-26):** branch protection review on PR #13.
+
+- Devin caught `required_approving_review_count: 1` deviation via security reasoning ("bypass-by-default normalizes bypassing")
+- Cascade caught `enforce_admins: false` deviation via literal plan re-read (plan said `✅ Yes`)
+- Devin's own prior recommendation (D2: solo account needs flexibility) had created a cognitive frame that made `enforce_admins: false` look intentional rather than erroneous
+- Cascade's plan re-read, untainted by D2 reasoning, surfaced it
+
+Neither reviewer alone would have caught both. Both were necessary.
+
 ---
 
 ## Workflow per Change
@@ -96,6 +121,43 @@ All relevant parties confirm in writing before merge:
 - Only the Owner clicks **Merge** on GitHub
 - Squash-and-merge is preferred for clean history
 - After merge, verify production deployment within 5 minutes
+
+### 7. GitHub Actions Workflow Trial-Run Requirement
+
+For any change that adds or modifies a `.github/workflows/*.yml` file,
+this additional verification is **required** before declaring review
+feedback "applied" or "verified":
+
+1. **Push to a feature branch** (NOT `main`; let PR-trigger or push-trigger fire the workflow)
+2. **Wait for the workflow run to complete**
+3. **Document the run URL and per-step conclusions** in the PR description or review log
+4. **For expected failures** (e.g., GHAS-dependent steps on private repos), **predict the failure mode in writing BEFORE the trial run completes**, then confirm the actual failure matches the prediction
+
+**A workflow change is "verified" only after runtime evidence, not after
+string-level review.**
+
+#### Why Step 4 matters
+
+Step 4 turns "expected failures" into **testable predictions** rather
+than **post-hoc excuses**:
+
+- ✅ Predicted: "Perform CodeQL Analysis will fail with 'code scanning not enabled' on private repo"
+- ✅ Actual: matches prediction → workflow is correct; failure is environmental
+- ❌ Without Step 4: any failure can be retroactively labeled "expected" without rigor
+
+#### Reference case (2026-04-27)
+
+PR #13's workflow had `queries: default`, which was string-reviewed
+against Devin's D3 spec recommendation by **four review layers**:
+
+- Round 1: Devin's own spec recommendation matched the YAML literal
+- Round 4: Cascade's self-review matched recommendation to YAML
+- Round 6: Devin's PR review matched YAML to recommendation
+- Round 6: Cascade's plan re-read matched both to plan text
+
+All four passed. The runtime caught the bug in 30 seconds: `default` is
+not a valid CodeQL query pack name. Adopting this trial-run rule
+prevents that class of escape.
 
 ---
 
