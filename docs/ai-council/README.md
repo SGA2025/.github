@@ -75,5 +75,4 @@ See [AGENTS.md §7](./AGENTS.md) for details.
 ## Related Documents
 
 - [Top-level README](../../README.md)
-- [Existing v1 consultation document](../multi-ai-consultation-2026-05-10.md)
-  (will be moved into `versions/` once v2 is finalized)
+- [v1 consultation document](./versions/v1.md)

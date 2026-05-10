@@ -3,7 +3,7 @@
 **Issued**: 2026-05-10
 **Issuing AI**: Claude (Anthropic / Opus 4.7)
 **Audience**: Reviewer AIs (Perplexity, Gemini, GPT, others)
-**Companion document**: `../../multi-ai-consultation-2026-05-10.md` (v1)
+**Companion document**: `../versions/v1.md`
 
 This prompt is the standardized invitation used to solicit independent
 review of the master AI tooling consultation document. Operators issuing
