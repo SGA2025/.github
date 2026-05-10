@@ -1,7 +1,10 @@
 ---
 title: "AI Council Bootstrap Protocol"
-version: 1.0
+version: 1.1
 date: 2026-05-10
+changelog:
+  - "v1.1 (2026-05-10): canonical_paths updated for derisk branch migration to claude/council-clean-2026-05-10. §2.1 updated with branch consolidation status. §11 deployment URLs updated."
+  - "v1.0 (2026-05-10): initial release."
 applies_to:
   - Claude Code (Anthropic)
   - Cascade (Windsurf / Codeium)
@@ -12,9 +15,9 @@ applies_to:
 load_order: "SESSION_START — read this file BEFORE any council-related work"
 canonical_paths:
   - sga2025/.github @ claude/unified-agent-rules-qlzyT : docs/ai-council/COUNCIL_BOOTSTRAP.md
-  - sga2025/derisk @ codex/add-gpt-review-request-packet : docs/ai-council/COUNCIL_BOOTSTRAP.md
+  - sga2025/derisk @ claude/council-clean-2026-05-10 : docs/ai-council/COUNCIL_BOOTSTRAP.md
 mirror_status: "Two files, identical content. Update both atomically."
-upstream_authority: "AGENTS.md @ derisk/codex/add-gpt-review-request-packet (commit 1c074a4f or later)"
+upstream_authority: "AGENTS.md @ derisk/claude/council-clean-2026-05-10 (commit 22a202b8 or later)"
 edit_policy: "This file is reference/bootstrap. Modify only via PR with coordinator (Claude) review + human owner approval."
 ---
 
@@ -30,7 +33,7 @@ edit_policy: "This file is reference/bootstrap. Modify only via PR with coordina
 各 AI は council 作業に着手する**前**に、以下 5 ステップを順に完了する。
 
 ```
-[ ] Step 1: Read AGENTS.md (canonical: derisk/codex/-packet @ HEAD)
+[ ] Step 1: Read AGENTS.md (canonical: derisk/claude/council-clean-2026-05-10 @ HEAD)
 [ ] Step 2: Read this COUNCIL_BOOTSTRAP.md (you are here)
 [ ] Step 3: Read latest v2.md (versions/v2.md, both repos)
 [ ] Step 4: Read latest coordinator synthesis
@@ -48,17 +51,18 @@ edit_policy: "This file is reference/bootstrap. Modify only via PR with coordina
 | AI | 主担当領域 | 書込先 (responses/) | 役割タイプ |
 |---|---|---|---|
 | **Claude Code** (Anthropic) | coordinator、横断 synthesis、handoff 統合 | 両 repo | coordinator + reviewer |
-| **Cascade** (Codeium / Windsurf) | 実行系、IDE 統合、git 操作、実環境テスト | derisk @ codex/-packet | reviewer + executor |
-| **GPT** (OpenAI / Codex) | 構造提案、リファクタ提案、council reviewer | derisk @ codex/-packet または -p50y4q | reviewer (daily 利用ではない) |
-| **Gemini** (Google) | repo 構造、Git レイヤー強制、Workspace 統合検討 | derisk @ codex/-packet | reviewer |
-| **Perplexity** (Computer) | OSINT、越境法令、waiver、Q list 提起 | derisk @ codex/-packet | reviewer + researcher |
+| **Cascade** (Codeium / Windsurf) | 実行系、IDE 統合、git 操作、実環境テスト、別紙 A 起案 | derisk @ claude/council-clean-2026-05-10 | reviewer + executor + drafter |
+| **GPT** (OpenAI / Codex) | 構造提案、リファクタ提案、council reviewer | derisk @ claude/council-clean-2026-05-10 | reviewer (daily 利用ではない) |
+| **Gemini** (Google) | repo 構造、Git レイヤー強制、Workspace 統合検討 | derisk @ claude/council-clean-2026-05-10 | reviewer |
+| **Perplexity** (Computer) | OSINT、越境法令、waiver、Q list 提起、別紙 D ドラフト | derisk @ claude/council-clean-2026-05-10 | reviewer + researcher |
 | **Devin** (Cognition, 採用時) | 非機密 PR タスク、自律実装 | 別途 allowlist 管理 | future executor |
 
 ### 1.1 役割の重複と境界
 
 - Claude Code は coordinator かつ reviewer。contested 論点では「**coordinator 私見**」と明示ラベルを付け、他 AI と等格で扱う（自分の立場を中立を装って隠さない）
-- Perplexity は OSINT 自社強みのため、別紙 A 依頼先選定で自陣営バイアスを開示
+- Perplexity は OSINT 自社強みのため、別紙 A 依頼先選定で自陣営バイアスを開示し、**別紙 A 起案は辞退**（Cascade 単独推奨）
 - GPT は council reviewer のみ。daily 利用ツールには含まれない（v2 §3.1）
+- Cascade は別紙 A 起案を引き受け表明済（Round 2 final review §7）
 
 ---
 
@@ -68,22 +72,27 @@ edit_policy: "This file is reference/bootstrap. Modify only via PR with coordina
 
 | 優先 | パス | 役割 |
 |---|---|---|
-| 1 | `derisk/docs/ai-council/AGENTS.md` @ HEAD | 不変ルール（最新 commit `1c074a4f` 以降） |
+| 1 | `derisk/docs/ai-council/AGENTS.md` @ HEAD（claude/council-clean-2026-05-10） | 不変ルール |
 | 2 | `derisk/docs/ai-council/COUNCIL_BOOTSTRAP.md` (本書) | session-start 手順 |
-| 3 | `.github/docs/ai-council/versions/v2.md` または `derisk/.../v2.md` | 最新版 master document（v2.0-draft） |
-| 4 | `responses/2026-05-10_claude_coordinator-synthesis-and-handoff-reply.md` (両 repo) | 最新 coordinator synthesis |
+| 3 | `derisk/.../versions/v2.md` または `.github/.../versions/v2.md` | 最新版 master document（v2.0-draft または v2.0-final） |
+| 4 | `responses/2026-05-10_claude_coordinator-synthesis-and-handoff-reply.md` (両 repo) | coordinator synthesis |
 | 5 | 各自宛の handoff / reply ファイル（addressed_to メタで特定可能） | 自分宛タスク |
 | 6 | その他 responses/、reference/、prompts/ | 文脈補完 |
 | 7 | `versions/v1.md`、`versions/v2-framework-draft.md` | 履歴参照 |
 
-### 2.1 ブランチ二股注意
+### 2.1 Branch Status（v1.1 で更新）
 
-derisk には 2 本の codex 兄弟ブランチが存在:
+**Canonical（現運用ブランチ）**:
+- **`derisk @ claude/council-clean-2026-05-10`**（本書 v1.1 時点の正本）
+- `.github @ claude/unified-agent-rules-qlzyT`（mirror、両 repo 同期）
 
-- `codex/add-gpt-review-request-packet` (HEAD で常時最新): Cascade/Gemini/Perplexity/Claude/全 master 文書
-- `codex/add-gpt-review-request-packet-p50y4q`: GPT consultation-note + repository-status-check のみ
+**Archived（参照のみ、新規 push 禁止）**:
+- `derisk @ codex/add-gpt-review-request-packet`（HEAD `07f01233` で凍結）
+- `derisk @ codex/add-gpt-review-request-packet-p50y4q`（HEAD `0e83b02e` で凍結）
 
-**両ブランチを必ず両方 fetch する**。一方だけだと council 全体の半分しか見えない（v2 §3.4 / Claude coord §3.2）。
+**経緯**: 2026-05-10 夕方、`codex/add-gpt-review-request-packet` で発生したリベース事故により main 由来のコンテンツが branch から消失。Cascade が main から新ブランチ `claude/council-clean-2026-05-10` を作成し、council 成果物のみ cherry-pick 移行（commit `22a202b8`）。旧 codex 兄弟ブランチは forensic 記録として archive 化。
+
+**重要**: GPT は archived `-p50y4q` ブランチ上でのみ council ファイルにアクセスしていた可能性あり。新セッションでは必ず canonical ブランチ（`claude/council-clean-2026-05-10`）を fetch すること。
 
 ---
 
@@ -116,7 +125,7 @@ edit_policy: "<inherited or specific>"
 
 ---
 
-## §4. Verify-Before-Disclaim Protocol（AGENTS.md 1c074a4f 由来、再掲）
+## §4. Verify-Before-Disclaim Protocol（AGENTS.md `1c074a4f` 由来、再掲）
 
 過去の commit / file / 他 AI の主張を「**捏造だった**」「**hallucination**」「**存在しない**」と disclaim する前に:
 
@@ -138,11 +147,15 @@ Claude Code は本協議 2026-05-10 に、前 Claude セッションが書いた
 
 verify-before-disclaim を踏んでいれば 30 秒で訂正できた事例。本書はこの再発を防ぐ。
 
+### 4.2 実例 2（リベース事故）
+
+2026-05-10 夕方、Claude Code は MCP の listing 出力（部分的だった）に基づき「branch から大量ファイルが消失した重大事故」と過剰警告した。Cascade のローカル `git diff` で実態は限定的（草案 16 件の損失）と判明。**外部ツールの listing も verify-before-disclaim の対象**。
+
 ---
 
 ## §5. Write Discipline (AGENTS.md 継承)
 
-- `reference/` は **不変**。CODEOWNERS（commit `1ede2198`）+ pre-commit hook（`db42af6c`）で技術強制済
+- `reference/` は **不変**。CODEOWNERS（`.github/CODEOWNERS`）+ pre-commit hook（`.githooks/pre-commit`）で技術強制済
 - `prompts/` は既存ファイル不変。新 round は新ファイル `prompts/<round>_to-other-ai.md`
 - `responses/` のみ新規 append 可。命名: `YYYY-MM-DD_<your-name>_<topic>.md`
 - `versions/` は coordinator (Claude) または人間オーナーのみ書込
@@ -216,19 +229,19 @@ Q3. 過去 commit を「捏造」と疑ったらどうするか？
 Q4. 自分の自陣営バイアス開示は必須か？
     → 必須。response 末尾節
 
-Q5. derisk の codex 兄弟ブランチは何本あるか？
-    → 2 本（-packet と -p50y4q）。両方 fetch 必須
+Q5. derisk の canonical ブランチ名は？
+    → claude/council-clean-2026-05-10（v1.1 で変更）。codex/-packet 系は archived
 ```
 
 5 問のうち 1 つでも自信を持って答えられないなら、§2 canonical read order に戻る。
 
 ---
 
-## §9. Council State Quick Reference (2026-05-10 時点)
+## §9. Council State Quick Reference (2026-05-10 時点 / v1.1)
 
 ### 9.1 現行 master document
 - `versions/v2.md` (v2.0-draft, 39 KB, 11 部構成)
-- 状態: **DRAFT** — 人間専門家承認待ち
+- 状態: **DRAFT** — Perplexity Round 2 final review が 5 must-fix 提示済、人間専門家承認待ち
 
 ### 9.2 現行 coordinator
 - Claude Code (Anthropic)
@@ -239,16 +252,18 @@ Q5. derisk の codex 兄弟ブランチは何本あるか？
 - 解約: Cursor / ChatGPT Plus
 - 保留: Devin Cloud (A テスト)
 
-### 9.4 直近の council 動作（高速並走実装）
+### 9.4 直近の council 動作
 - `1ede2198`: CODEOWNERS（reference/ 不変性技術強制）
 - `db42af6c`: pre-commit hook
 - `1c074a4f`: AGENTS.md 改訂（prompts 不変・verify-before-disclaim・self-id）
+- `22a202b8`: claude/council-clean-2026-05-10 ブランチ作成（リベース事故からの修復）
+- 現 HEAD: 本コミット（COUNCIL_BOOTSTRAP v1.1）
 
 ### 9.5 未決事項
-- OQ-A: repo public 化予定
-- OQ-B: reference/ 新規追加経路 (a/b/c)
-- OQ-C: 確定事項 9 項目の正本所在
-- OQ-D: Perplexity 30 日パイロット
+- OQ-A: repo public 化予定（先生判断待ち）
+- OQ-B: reference/ 新規追加経路 — **実装済**（CODEOWNERS + pre-commit、v1.1 で確認）
+- OQ-C: 確定事項 7 項目 ↔ v1 マッピング（別紙 B 起案待ち）
+- OQ-D: Perplexity 30 日パイロット（fallback: Gemini DR + Audit profile 案あり）
 - OQ-E: Devin A テスト
 
 ---
@@ -258,9 +273,10 @@ Q5. derisk の codex 兄弟ブランチは何本あるか？
 ### 10.1 本書の更新
 
 - バージョンは frontmatter `version` フィールドで管理
-- マイナー更新: 1.0 → 1.1（運用 tweaks）
+- マイナー更新: 1.0 → 1.1（運用 tweaks、ブランチ参照更新等）
 - メジャー更新: 1.0 → 2.0（役割変更、新 AI 追加、規律根本変更）
 - 更新は coordinator (Claude) 起案 → 全 council reviewer に paste 配布 → 反対なければ commit
+- 各更新は frontmatter の `changelog` リストに 1 行で記録
 
 ### 10.2 各 AI の自己更新（skill / memory への取込）
 
@@ -274,7 +290,7 @@ Q5. derisk の codex 兄弟ブランチは何本あるか？
 
 ## §11. Per-AI Deployment（各 AI の self-load 設定）
 
-各 AI が本書を session 開始時に自動で読み込むための具体設定:
+各 AI が本書を session 開始時に自動で読み込むための具体設定（v1.1 でブランチ参照更新）:
 
 ### 11.1 Claude Code
 
@@ -283,8 +299,8 @@ Q5. derisk の codex 兄弟ブランチは何本あるか？
 ```markdown
 ## Council Bootstrap
 Before any council-related work, fetch and read:
-- derisk/docs/ai-council/COUNCIL_BOOTSTRAP.md @ HEAD
-- derisk/docs/ai-council/AGENTS.md @ HEAD
+- derisk/docs/ai-council/COUNCIL_BOOTSTRAP.md @ HEAD on claude/council-clean-2026-05-10
+- derisk/docs/ai-council/AGENTS.md @ HEAD on claude/council-clean-2026-05-10
 Use mcp__github__get_file_contents to fetch.
 Complete §0 checklist before reading reference/ or writing responses/.
 ```
@@ -293,7 +309,7 @@ Complete §0 checklist before reading reference/ or writing responses/.
 
 ### 11.2 Cascade (Windsurf)
 
-`.windsurf/rules/00-council-bootstrap.md` を新規作成（always_on ルール、ルート配置）:
+`.windsurf/rules/00-council-bootstrap.md`（always_on ルール、ルート配置）:
 
 ```markdown
 ---
@@ -303,7 +319,7 @@ trigger: always_on
 # Council bootstrap rule
 Before any docs/ai-council/ work, follow the §0 checklist in
 docs/ai-council/COUNCIL_BOOTSTRAP.md (latest version on
-codex/add-gpt-review-request-packet branch).
+claude/council-clean-2026-05-10 branch).
 ```
 
 ルール文字数 12,000 字制限内に収める（v1 §6.1）。
@@ -315,7 +331,8 @@ repo root `AGENTS.md`（またはワークスペース AGENTS.md）に追加:
 ```markdown
 ## Council Bootstrap (mandatory pre-read)
 For all docs/ai-council/ activity, read
-docs/ai-council/COUNCIL_BOOTSTRAP.md first. It contains role routing,
+docs/ai-council/COUNCIL_BOOTSTRAP.md first (on the
+claude/council-clean-2026-05-10 branch). It contains role routing,
 read order, write discipline, and the verify-before-disclaim protocol.
 Local fetch may fail (HTTPS 403 in some sandboxes); in that case,
 human owner provides paste-in fallback.
@@ -329,7 +346,7 @@ human owner provides paste-in fallback.
 You are participating in the Multi-AI Council at sga2025/derisk and
 sga2025/.github. Before any review work, read:
 
-  https://github.com/SGA2025/derisk/blob/codex/add-gpt-review-request-packet/docs/ai-council/COUNCIL_BOOTSTRAP.md
+  https://github.com/SGA2025/derisk/blob/claude/council-clean-2026-05-10/docs/ai-council/COUNCIL_BOOTSTRAP.md
 
 Complete §0 checklist. Confirm §8 self-test mentally. Then proceed.
 Your role per §1: reviewer (Google / repo architecture, Workspace integration).
@@ -342,10 +359,11 @@ Your role per §1: reviewer (Google / repo architecture, Workspace integration).
 ```text
 Council member: Perplexity (Computer).
 Mandatory pre-read:
-  https://github.com/SGA2025/derisk/blob/codex/add-gpt-review-request-packet/docs/ai-council/COUNCIL_BOOTSTRAP.md
+  https://github.com/SGA2025/derisk/blob/claude/council-clean-2026-05-10/docs/ai-council/COUNCIL_BOOTSTRAP.md
 Complete §0 checklist. Self-test §8.
 Your role per §1: reviewer + researcher (OSINT, cross-border law, waiver).
 network_access metadata required.
+You DECLINED Annex A drafting (per Round 2 final review §7); Cascade is the sole drafter.
 ```
 
 ### 11.6 Devin (採用時)
@@ -362,7 +380,7 @@ network_access metadata required.
 - Anthropic 系ツール（Claude Code 自身）の中核採用継続を正当化する記述
 - §4 verify-before-disclaim を強調するのは Claude が当該失敗を実演したため
 
-これらバイアスは §1.1 で「coordinator 私見」ラベル化、§3.3 で別紙 B「提案者所属」列での外部裁定、§4.1 で実例公開、によって部分緩和されている。完全な中立化は不可能であり、人間オーナー (SKG) と他 council reviewer の独立検証に委ねる。
+これらバイアスは §1.1 で「coordinator 私見」ラベル化、別紙 B「提案者所属」列での外部裁定（v2 §8.3 に依拠）、§4.1〜4.2 で実例公開、によって部分緩和されている。完全な中立化は不可能であり、人間オーナー (SKG) と他 council reviewer の独立検証に委ねる。
 
 ---
 
@@ -374,4 +392,4 @@ network_access metadata required.
 
 ---
 
-End of COUNCIL_BOOTSTRAP.md v1.0
+End of COUNCIL_BOOTSTRAP.md v1.1
