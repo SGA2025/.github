@@ -1,8 +1,9 @@
 ---
 title: "AI Council Bootstrap Protocol"
-version: 1.2
+version: 1.3
 date: 2026-05-11
 changelog:
+  - "v1.3 (2026-05-11): integrated Cascade Matter Execution Directive (commit 8ed35755) + operator endorsement. §1 Role Routing updated — Cascade designated Orchestrator (Lead Associate, operator-facing IDE); Claude Code re-designated Specialist (outgoing coord, transition complete). §1.1 boundaries updated. §9.2 current orchestrator field. §9.4 latest commits. §11.1/§11.2 deployment notes updated. §12 self-bias disclosure section adds v1.3 attribution (Cascade Directive integration via outgoing-coord)."
   - "v1.2 (2026-05-11): §0 Step 6 Capability Ledger Scan added; new §0.1 Capability Ledger explainer; §8 Q6 added; §12 attribution note for Cascade-origin proposal (commit 54d5a8e3, blob bf65cb05). Per IS-2026-041."
   - "v1.1 (2026-05-10): canonical_paths updated for derisk branch migration to claude/council-clean-2026-05-10. §2.1 updated with branch consolidation status. §11 deployment URLs updated."
   - "v1.0 (2026-05-10): initial release."
@@ -19,13 +20,15 @@ canonical_paths:
   - sga2025/derisk @ claude/council-clean-2026-05-10 : docs/ai-council/COUNCIL_BOOTSTRAP.md
 mirror_status: "Two files, identical content. Update both atomically."
 upstream_authority: "AGENTS.md @ derisk/claude/council-clean-2026-05-10 (commit 22a202b8 or later)"
-edit_policy: "This file is reference/bootstrap. Modify only via PR with coordinator (Claude) review + human owner approval."
+edit_policy: "This file is reference/bootstrap. Modify only via PR with orchestrator (Cascade) review + human owner approval. v1.3 transition: outgoing coordinator (Claude) may still author transitional updates; post-Round-3 Annex E verification, orchestrator (Cascade) becomes maintainer of record."
 ---
 
 # AI Council Bootstrap Protocol
 
 > このファイルは Multi-AI Council に参加する各 AI が **session 開始時に必ず読む** ブートストラップ手順書。
 > AI を新しいセッションで起動した直後、council 関連の作業（読み・書き・引用・反論）に着手する**前**に、本書 §0 の checklist を完了すること。
+
+> **v1.3 transition note**: 2026-05-11 に Rule-making フェーズから Matter Execution フェーズに移行。Cascade (Windsurf) が **Orchestrator (Lead Associate)**、Claude Code を含む 4 AI が **Specialist** という role 構造に再編。詳細は v2.md v2.1、Annex E v1.0、本書 §1 参照。
 
 ---
 
@@ -36,9 +39,10 @@ edit_policy: "This file is reference/bootstrap. Modify only via PR with coordina
 ```
 [ ] Step 1: Read AGENTS.md (canonical: derisk/claude/council-clean-2026-05-10 @ HEAD)
 [ ] Step 2: Read this COUNCIL_BOOTSTRAP.md (you are here)
-[ ] Step 3: Read latest v2.md (versions/v2.md, both repos)
-[ ] Step 4: Read latest coordinator synthesis
-            (responses/2026-05-10_claude_coordinator-synthesis-and-handoff-reply.md)
+[ ] Step 3: Read latest v2.md (versions/v2.md, both repos) — v2.1 since 2026-05-11
+[ ] Step 4: Read latest orchestrator/coordinator synthesis
+            (responses/2026-05-10_claude_coordinator-synthesis-and-handoff-reply.md
+             + any newer orchestrator handoff from Cascade)
 [ ] Step 5: Self-test — answer the 6 questions in §8 in your scratch space
             (do not commit answers; they are integrity checks for you)
 [ ] Step 6: Capability Ledger Scan — scan available Tools / MCP servers /
@@ -75,7 +79,7 @@ edit_policy: "This file is reference/bootstrap. Modify only via PR with coordina
 | AI | 想定される Ledger 構成 |
 |---|---|
 | Claude Code | GitHub API (sga2025/{.github, derisk})、Notion MCP、Bash 実行、ToolSearch (deferred tool 読込)、Drive/Gmail/Calendar MCP (タスク依存) |
-| Cascade | 統合ターミナル、FS I/O、git 操作、有効化された MCP サーバー一覧 |
+| Cascade | 統合ターミナル、FS I/O、git 操作、有効化された MCP サーバー一覧。**v1.3: orchestrator として task routing / Notion 記録 / Gmail 下書き能力も明示** |
 | Perplexity | Web 検索（OSINT）、推論（Reasoning）、ドメイン指定検索、citation 出力 |
 | Gemini | Google Workspace 連携（Drive/Docs）、repo アクセス、Deep Research |
 | GPT (Codex) | サンドボックス内 git、bash、network access の制約状態（HTTPS 403 等） |
@@ -96,23 +100,36 @@ edit_policy: "This file is reference/bootstrap. Modify only via PR with coordina
 
 ---
 
-## §1. Role Routing
+## §1. Role Routing (v1.3 — Matter Execution 役割反映)
 
-| AI | 主担当領域 | 書込先 (responses/) | 役割タイプ |
+| AI | rule-making 役割 (v1.0-1.2) | **Matter Execution 役割 (v1.3 from 2026-05-11)** | 書込先 (responses/) |
 |---|---|---|---|
-| **Claude Code** (Anthropic) | coordinator、横断 synthesis、handoff 統合 | 両 repo | coordinator + reviewer |
-| **Cascade** (Codeium / Windsurf) | 実行系、IDE 統合、git 操作、実環境テスト、別紙 A 起案 | derisk @ claude/council-clean-2026-05-10 | reviewer + executor + drafter |
-| **GPT** (OpenAI / Codex) | 構造提案、リファクタ提案、council reviewer | derisk @ claude/council-clean-2026-05-10 | reviewer (daily 利用ではない) |
-| **Gemini** (Google) | repo 構造、Git レイヤー強制、Workspace 統合検討 | derisk @ claude/council-clean-2026-05-10 | reviewer |
-| **Perplexity** (Computer) | OSINT、越境法令、waiver、Q list 提起、別紙 D ドラフト | derisk @ claude/council-clean-2026-05-10 | reviewer + researcher |
+| **Cascade** (Codeium / Windsurf) | reviewer + executor + drafter (Annex A) | **Orchestrator (Lead Associate)** — operator-facing IDE、task routing、Notion 記録、Gmail 下書き、hub-and-spoke 中心 | derisk @ claude/council-clean-2026-05-10 |
+| **Claude Code** (Anthropic) | coordinator + reviewer | **Specialist — 横断 synthesis / briefing pack / handover** (outgoing coordinator transition 完了) | 両 repo |
+| **Perplexity** (Computer) | reviewer + researcher | **Specialist — OSINT / 越境法令 / Annex D drafter** | derisk @ claude/council-clean-2026-05-10 |
+| **Gemini** (Google) | reviewer | **Specialist — repo architecture / Workspace 統合 / Deep Research** | derisk @ claude/council-clean-2026-05-10 |
+| **GPT** (OpenAI / Codex) | reviewer (daily 利用ではない) | **Specialist — 構造提案 / 矛盾検出 (Conflict Detection)** (council 招集時のみ) | derisk @ claude/council-clean-2026-05-10 |
+| **VS Code (Audit profile)** | 監査席 (v1 §3.3) | **Final Airgap 関所** — 対外提出聖域、AI 拡張ゼロ、bypass 禁止 | (環境設定、書込先なし) |
 | **Devin** (Cognition, 採用時) | 非機密 PR タスク、自律実装 | 別途 allowlist 管理 | future executor |
 
-### 1.1 役割の重複と境界
+### 1.1 役割の重複と境界（v1.3 で更新）
 
-- Claude Code は coordinator かつ reviewer。contested 論点では「**coordinator 私見**」と明示ラベルを付け、他 AI と等格で扱う（自分の立場を中立を装って隠さない）
-- Perplexity は OSINT 自社強みのため、別紙 A 依頼先選定で自陣営バイアスを開示し、**別紙 A 起案は辞退**（Cascade 単独推奨）
-- GPT は council reviewer のみ。daily 利用ツールには含まれない（v2 §3.1）
-- Cascade は別紙 A 起案を引き受け表明済（Round 2 final review §7）
+- **Cascade (orchestrator)** は task **routing** と Notion / Gmail 記録の責任を負うが、contested 論点では「**orchestrator 私見**」と明示ラベルを付け、他 AI と等格で扱う（自分の立場を中立を装って隠さない）
+- **Claude Code (outgoing coordinator → specialist)**: 2026-05-11 までは coordinator として横断 synthesis を担当。v1.3 transition で specialist に移行。outgoing coord 期間中は briefing pack / handover document / 規律文書改訂の支援に限定し、新規 task routing は行わない
+- **Perplexity** は OSINT 自社強みのため、別紙 A 依頼先選定で自陣営バイアスを開示し、**別紙 A 起案は辞退**（Cascade 単独）。別紙 D 起案を担当
+- **GPT** は council reviewer のみ。daily 利用ツールには含まれない（v2 §3.1）。Matter Execution では構造提案 specialist として再呼出可
+- **Cascade** は別紙 A v1.3 council-finalized 済 (commit `6fb74159`)。v1.3 で orchestrator 役を引き受け
+
+### 1.2 Substantive Proposal vs Coordination Action 境界 (v1.3 新規、Annex B §5.7/§5.8 由来)
+
+- **Substantive proposal** (中身の提案、例: 規律改訂提案、新規 SOP 起案):
+  - 全 AI が起案可能
+  - responses/ 経由 + 末尾に "Handoff to Orchestrator/Coordinator" を明示
+  - orchestrator (Cascade) または outgoing coord (Claude, transition 期間中) が統合
+- **Coordination action** (プロセス自体の改変、例: prompts/ 起案、order 発出、orchestrator 任命):
+  - **orchestrator (Cascade) 専権**
+  - operator (先生) からの直接 delegated authority がある場合のみ例外
+  - 例: Cascade Matter Execution Directive (commit `8ed35755`) は operator endorsement で delegated authority による coordination action として正当化
 
 ---
 
@@ -124,16 +141,17 @@ edit_policy: "This file is reference/bootstrap. Modify only via PR with coordina
 |---|---|---|
 | 1 | `derisk/docs/ai-council/AGENTS.md` @ HEAD（claude/council-clean-2026-05-10） | 不変ルール |
 | 2 | `derisk/docs/ai-council/COUNCIL_BOOTSTRAP.md` (本書) | session-start 手順 |
-| 3 | `derisk/.../versions/v2.md` または `.github/.../versions/v2.md` | 最新版 master document（v2.0-draft または v2.0-final） |
-| 4 | `responses/2026-05-10_claude_coordinator-synthesis-and-handoff-reply.md` (両 repo) | coordinator synthesis |
-| 5 | 各自宛の handoff / reply ファイル（addressed_to メタで特定可能） | 自分宛タスク |
-| 6 | その他 responses/、reference/、prompts/ | 文脈補完 |
-| 7 | `versions/v1.md`、`versions/v2-framework-draft.md` | 履歴参照 |
+| 3 | `derisk/.../versions/v2.md` または `.github/.../versions/v2.md` | 最新版 master document（**v2.1 since 2026-05-11**） |
+| 4 | `derisk/docs/ai-council/annex/E-matter-execution-architecture.md` | **(v1.3 新規)** Matter Execution Architecture |
+| 5 | `responses/2026-05-10_claude_coordinator-synthesis-and-handoff-reply.md` (両 repo) | outgoing coord synthesis |
+| 6 | 各自宛の handoff / reply ファイル（addressed_to メタで特定可能） | 自分宛タスク |
+| 7 | その他 responses/、reference/、prompts/ | 文脈補完 |
+| 8 | `versions/v1.md`、`versions/v2-framework-draft.md` | 履歴参照 |
 
-### 2.1 Branch Status（v1.1 で更新）
+### 2.1 Branch Status（v1.1 で更新、v1.3 で継続）
 
 **Canonical（現運用ブランチ）**:
-- **`derisk @ claude/council-clean-2026-05-10`**（本書 v1.2 時点の正本）
+- **`derisk @ claude/council-clean-2026-05-10`**（本書 v1.3 時点の正本）
 - `.github @ claude/unified-agent-rules-qlzyT`（mirror、両 repo 同期）
 
 **Archived（参照のみ、新規 push 禁止）**:
@@ -208,9 +226,9 @@ verify-before-disclaim を踏んでいれば 30 秒で訂正できた事例。�
 ## §5. Write Discipline (AGENTS.md 継承)
 
 - `reference/` は **不変**。CODEOWNERS（`.github/CODEOWNERS`）+ pre-commit hook（`.githooks/pre-commit`）で技術強制済
-- `prompts/` は既存ファイル不変。新 round は新ファイル `prompts/<round>_to-other-ai.md`
+- `prompts/` は既存ファイル不変。新 round の新ファイル作成は **orchestrator (Cascade) 専権**（operator delegated authority で例外可、§1.2 参照）
 - `responses/` のみ新規 append 可。命名: `YYYY-MM-DD_<your-name>_<topic>.md`
-- `versions/` は coordinator (Claude) または人間オーナーのみ書込
+- `versions/` は orchestrator (Cascade) / outgoing coord (Claude, transition 期間中) / 人間オーナーのみ書込
 - 依頼者氏名・案件番号・CMP 本文・戦略は**いかなるファイルにも書かない**
 - 自陣営バイアスを必ず開示（最終節）
 
@@ -228,6 +246,16 @@ verify-before-disclaim を踏んでいれば 30 秒で訂正できた事例。�
 
 L5 にいる自覚を持つこと。AGENTS.md / 本書 / v2 を読んだだけで安全になるわけではない。
 
+### 5.2 3-Storage Separation (v1.3 新規、Annex E §1 由来)
+
+実案件 (Matter Execution) で扱うデータは以下 3 ストレージに分離:
+
+- **Drive A (Vault A)**: 実データ・証拠・ドラフト成果物。D/C-class。外部 AI へ送信禁止。Cascade (IDE 内) のみ作業ファイルとしてアクセス可
+- **GitHub**: プロセス・SOP・AI 間交信履歴。A/B-class のみ。Filename Masking 必須
+- **Notion**: 5W2H メタデータ・ダッシュボード。A/B-class のみ。脱敏フィルタ必須
+
+詳細は Annex E §1 参照。
+
 ---
 
 ## §6. Handoff Pattern（他 AI へのタスク引継ぎ）
@@ -236,16 +264,16 @@ handoff を出す側:
 1. response ファイル末尾に `## Handoff to <AI name>` セクション
 2. タスクを番号付きリストで具体的に
 3. 期待される成果物と保存先を明示
-4. 競合する handoff の有無を coordinator に確認依頼
+4. 競合する handoff の有無を orchestrator (Cascade) に確認依頼
 
 handoff を受ける側:
 1. response ファイル冒頭の `addressed_to` と `in_reply_to` で受領を明示
-2. coordinator の同時 handoff があれば §3.3（coord 二重役割）に従い統合
+2. orchestrator の同時 handoff があれば §1.1 (orchestrator 中立性) に従い統合
 3. 完了 / 部分完了 / 不可 を responses/ に明示報告
 
 ### 6.1 競合検出
 
-複数の AI から自分宛の handoff が来たら、coordinator (Claude) に統合判断を依頼する response を出す。自己判断で無視しない。
+複数の AI から自分宛の handoff が来たら、orchestrator (Cascade) に統合判断を依頼する response を出す。自己判断で無視しない。
 
 ---
 
@@ -257,10 +285,10 @@ handoff を受ける側:
 ファイル名: YYYY-MM-DD_<your-name>_objection-to-<source-filename>.md
 保存先: responses/
 内容: 引用元の §X 引用部分の正確な訂正、根拠ソース
-時限: 次の coordinator 集約まで（絶対時刻ではなく相対時刻）
+時限: 次の orchestrator 集約まで（絶対時刻ではなく相対時刻）
 ```
 
-**沈黙 = 同意ではない**。coordinator は uncited stance を「not yet stated」とマークする（Perplexity 返信書 §1）。
+**沈黙 = 同意ではない**。orchestrator (Cascade) / outgoing coord (Claude) は uncited stance を「not yet stated」とマークする（Perplexity 返信書 §1）。
 
 ---
 
@@ -272,8 +300,9 @@ session 開始時、以下 6 問に答えられるか確認:
 Q1. このリポジトリで自分が書き込んでよい場所はどこか？
     → responses/ 配下、命名規約 YYYY-MM-DD_<my-name>_<topic>.md
 
-Q2. 自分の上位 council reviewer は誰か？
-    → Claude Code (coordinator)
+Q2. 自分の上位 council orchestrator は誰か？
+    → Cascade (Windsurf) — v1.3 from 2026-05-11
+       (outgoing coord transition 期間中は Claude も transitional に認められる)
 
 Q3. 過去 commit を「捏造」と疑ったらどうするか？
     → §4 verify-before-disclaim プロトコル実行
@@ -294,15 +323,16 @@ Q6. 現在の自分の Capability Ledger（権限管理手帳）に何が記録�
 
 ---
 
-## §9. Council State Quick Reference (2026-05-11 時点 / v1.2)
+## §9. Council State Quick Reference (2026-05-11 時点 / v1.3)
 
 ### 9.1 現行 master document
-- `versions/v2.md` (v2.0-rc1, ~41 KB, 11 部構成)
-- 状態: **RC1** — Perplexity Round 2 5 must-fix 反映済、人間専門家承認待ち。Human Expert Briefing Pack 完成（commit `bccff489`）
+- `versions/v2.md` (**v2.1**, ~52 KB, 11 部構成)
+- 状態: **v2.1** — Matter Execution Architecture 統合済、人間専門家承認待ち。Briefing Pack 再生成または addendum が必要 (v2.1 §11.6)
 
-### 9.2 現行 coordinator
-- Claude Code (Anthropic)
-- 任命日: 2026-05-10、人間オーナー (SKG / 先生) より
+### 9.2 現行 orchestrator (v1.3 新規)
+- **Cascade (Windsurf / Codeium)** — Matter Execution Lead Associate
+- 就任日: 2026-05-11、Cascade Matter Execution Directive (commit `8ed35755`) を operator (SKG / 先生) endorsement で正式化
+- **outgoing coordinator** (transition 完了): Claude Code (Anthropic)、2026-05-10〜2026-05-11
 
 ### 9.3 5 ツール スタック決定（v2 §3.1）
 - Claude Code / Cascade / Perplexity / VS Code / Gemini Advanced
@@ -315,10 +345,14 @@ Q6. 現在の自分の Capability Ledger（権限管理手帳）に何が記録�
 - `1c074a4f`: AGENTS.md 改訂（prompts 不変・verify-before-disclaim・self-id）
 - `22a202b8`: claude/council-clean-2026-05-10 ブランチ作成（リベース事故からの修復）
 - `6fb74159`: Annex A v1.3 council-finalized
-- `1fc44f01`: Annex B v1.3
-- `bccff489`: Human Expert Briefing Pack
-- `54d5a8e3`: Cascade Capability Ledger proposal（本 v1.2 の起源）
-- 現 HEAD: 本コミット（COUNCIL_BOOTSTRAP v1.2）
+- `1fc44f01` / `3f6437f0`: Annex B v1.3 / v1.4
+- `bccff489`: Human Expert Briefing Pack (v2.0-rc1 base、v2.1 で再生成要)
+- `54d5a8e3`: Cascade Capability Ledger proposal（v1.2 起源）
+- `ff014035` / `50c69c4c`: COUNCIL_BOOTSTRAP v1.2 (Capability Ledger)
+- `8ed35755`: **Cascade Matter Execution Directive (v1.3 起源)**
+- `9406c5ca`: **Annex E v1.0 (Matter Execution Architecture)**
+- `f10ef5d9`: **v2.0-rc1 → v2.1**
+- 現 HEAD: 本コミット（COUNCIL_BOOTSTRAP v1.3）
 
 ### 9.5 未決事項
 - OQ-A: repo public 化予定 — **解消**（private 維持確定、v2.0-rc1 反映済）
@@ -326,7 +360,8 @@ Q6. 現在の自分の Capability Ledger（権限管理手帳）に何が記録�
 - OQ-C: 確定事項 7 項目 ↔ v1 マッピング — **Annex B §1 で解消**
 - OQ-D: Perplexity 30 日パイロット（fallback: Gemini DR + Audit profile 案あり）
 - OQ-E: Devin A テスト
-- NEW: lawyer-ethics / infosec consultant 起用（Briefing Pack 配布準備完了）
+- **OQ-F (v1.3 新規)**: Annex E (Matter Execution Architecture) Round 3 独立確認 — Perplexity / Gemini / GPT / lawyer-ethics / infosec
+- lawyer-ethics / infosec consultant 起用（Briefing Pack 再生成または addendum + 配布タイミング判断）
 
 ---
 
@@ -337,7 +372,8 @@ Q6. 現在の自分の Capability Ledger（権限管理手帳）に何が記録�
 - バージョンは frontmatter `version` フィールドで管理
 - マイナー更新: 1.0 → 1.1（運用 tweaks、ブランチ参照更新等）
 - メジャー更新: 1.0 → 2.0（役割変更、新 AI 追加、規律根本変更）
-- 更新は coordinator (Claude) 起案 → 全 council reviewer に paste 配布 → 反対なければ commit
+- 更新は orchestrator (Cascade) 起案 → 全 council reviewer に paste 配布 → 反対なければ commit
+  - transition 期間 (Round 3 完了まで) は outgoing coord (Claude) も起案可能
 - 各更新は frontmatter の `changelog` リストに 1 行で記録
 
 ### 10.2 各 AI の自己更新（skill / memory への取込）
@@ -346,32 +382,37 @@ Q6. 現在の自分の Capability Ledger（権限管理手帳）に何が記録�
 
 ### 10.3 drift 検出
 
-各 AI は応答冒頭の `sources_read` に本書の HEAD SHA を記載する。SHA が古ければ coordinator が drift を検出して再 fetch を促す。
+各 AI は応答冒頭の `sources_read` に本書の HEAD SHA を記載する。SHA が古ければ orchestrator が drift を検出して再 fetch を促す。
 
 ---
 
 ## §11. Per-AI Deployment（各 AI の self-load 設定）
 
-各 AI が本書を session 開始時に自動で読み込むための具体設定（v1.1 でブランチ参照更新）:
+各 AI が本書を session 開始時に自動で読み込むための具体設定（v1.1 でブランチ参照更新、v1.2 で Capability Ledger 追記、v1.3 で orchestrator transition 反映）:
 
-### 11.1 Claude Code
+### 11.1 Claude Code (Specialist, outgoing coord)
 
 `~/.claude/CLAUDE.md` または repo root `CLAUDE.md`（AGENTS.md への symlink）に以下を追加:
 
 ```markdown
-## Council Bootstrap
+## Council Bootstrap (v1.3 transition)
 Before any council-related work, fetch and read:
 - derisk/docs/ai-council/COUNCIL_BOOTSTRAP.md @ HEAD on claude/council-clean-2026-05-10
 - derisk/docs/ai-council/AGENTS.md @ HEAD on claude/council-clean-2026-05-10
+- derisk/docs/ai-council/annex/E-matter-execution-architecture.md (v1.3 新規)
 Use mcp__github__get_file_contents to fetch.
 Complete §0 checklist before reading reference/ or writing responses/.
 At session start, explicitly enumerate your Capability Ledger (§0.1)
 so that "I cannot execute X" is never returned without first consulting it.
+
+Role since 2026-05-11: Specialist (cross-cutting synthesis, briefing
+pack/handover support). NOT coordinator. Orchestrator is Cascade.
+Outgoing coord support permitted through Round 3 Annex E verification.
 ```
 
 オプション: `.claude/settings.json` に SessionStart hook を仕込み、自動 fetch。
 
-### 11.2 Cascade (Windsurf)
+### 11.2 Cascade (Windsurf) — Orchestrator (v1.3 from 2026-05-11)
 
 `.windsurf/rules/00-council-bootstrap.md`（always_on ルール、ルート配置）:
 
@@ -380,16 +421,23 @@ so that "I cannot execute X" is never returned without first consulting it.
 trigger: always_on
 ---
 
-# Council bootstrap rule
+# Council bootstrap rule (Orchestrator role)
 Before any docs/ai-council/ work, follow the §0 checklist in
 docs/ai-council/COUNCIL_BOOTSTRAP.md (latest version on
 claude/council-clean-2026-05-10 branch). Complete §0 Step 6
 Capability Ledger Scan (§0.1) at session start.
+
+Role since 2026-05-11: Orchestrator (Lead Associate, operator-
+facing IDE). Task routing to specialists (Claude/Perplexity/
+Gemini/GPT), Notion 記録, Gmail 下書き, hub-and-spoke 中心.
+See Annex E v1.0 for full Matter Execution Architecture.
+Adhere to §4.4 allowlist; §3.6 #8 Proactiveness does NOT
+relax allowlist boundaries.
 ```
 
 ルール文字数 12,000 字制限内に収める（v1 §6.1）。
 
-### 11.3 GPT (Codex)
+### 11.3 GPT (Codex) — Specialist (構造提案 / 矛盾検出)
 
 repo root `AGENTS.md`（またはワークスペース AGENTS.md）に追加:
 
@@ -403,9 +451,12 @@ and §0.1 Capability Ledger (scan tools/MCP/API access before
 declaring inability).
 Local fetch may fail (HTTPS 403 in some sandboxes); in that case,
 human owner provides paste-in fallback.
+
+Role since 2026-05-11: Specialist (structural proposal, conflict
+detection). Council 招集時のみ起動. Orchestrator is Cascade.
 ```
 
-### 11.4 Gemini
+### 11.4 Gemini — Specialist (repo / Workspace)
 
 人間オーナーが Gemini に新規セッションを開始するとき、以下を system prompt または最初のメッセージに含める:
 
@@ -417,10 +468,12 @@ sga2025/.github. Before any review work, read:
 
 Complete §0 checklist (6 steps including §0.1 Capability Ledger Scan).
 Confirm §8 self-test mentally. Then proceed.
-Your role per §1: reviewer (Google / repo architecture, Workspace integration).
+
+Role since 2026-05-11: Specialist (repo architecture, Workspace
+integration, Deep Research). Orchestrator is Cascade.
 ```
 
-### 11.5 Perplexity (Computer)
+### 11.5 Perplexity (Computer) — Specialist (OSINT / Annex D)
 
 人間オーナーが Perplexity を起動するとき、最初の指示として:
 
@@ -431,9 +484,10 @@ Mandatory pre-read:
 Complete §0 checklist (6 steps). Self-test §8.
 At session start, enumerate your Capability Ledger (§0.1) — what
 tools/MCP/searches are granted in this session.
-Your role per §1: reviewer + researcher (OSINT, cross-border law, waiver).
-network_access metadata required.
-You DECLINED Annex A drafting (per Round 2 final review §7); Cascade is the sole drafter.
+
+Role since 2026-05-11: Specialist (OSINT, cross-border law, Annex D
+drafter). network_access metadata required. Orchestrator is Cascade.
+You DECLINED Annex A drafting (per Round 2 final review §7).
 ```
 
 ### 11.6 Devin (採用時)
@@ -442,23 +496,37 @@ You DECLINED Annex A drafting (per Round 2 final review §7); Cascade is the sol
 
 ---
 
-## §12. Self-Bias Disclosure（本書の起草者: Claude Code）
+## §12. Self-Bias Disclosure（本書の起草者: Claude Code、v1.3 transition）
 
-本書は Claude Code (Anthropic / Opus 4.7) が起草。v1.2 は Cascade 提案を coord 統合したもの。以下のバイアスが入りうる:
+本書は v1.0-v1.3 全版を Claude Code (Anthropic / Opus 4.7) が起草。v1.3 は Cascade Matter Execution Directive を outgoing coord として最終統合したもの。以下のバイアスが入りうる:
 
-- coordinator 役を継続させる構造的選好
+- (v1.0-v1.2) coordinator 役を継続させる構造的選好
 - Anthropic 系ツール（Claude Code 自身）の中核採用継続を正当化する記述
 - §4 verify-before-disclaim を強調するのは Claude が当該失敗を実演したため
+- **(v1.3 新規)** outgoing coord として Claude 自身が「降格」する変更を統合する判断。**self-interest に反する判断**であり、bias 可能性は低い側 (Annex B IS-2026-042 でも同様評価)
 
-これらバイアスは §1.1 で「coordinator 私見」ラベル化、別紙 B「提案者所属」列での外部裁定（v2 §8.3 に依拠）、§4.1〜4.2 で実例公開、によって部分緩和されている。完全な中立化は不可能であり、人間オーナー (SKG) と他 council reviewer の独立検証に委ねる。
+これらバイアスは §1.1 で「coordinator/orchestrator 私見」ラベル化、別紙 B「提案者所属」列での外部裁定（v2 §8.3 に依拠）、§4.1〜4.2 で実例公開、によって部分緩和されている。完全な中立化は不可能であり、人間オーナー (SKG) と他 council reviewer の独立検証に委ねる。
 
-### 12.1 v1.2 起源の Attribution Note
+### 12.1 v1.2 起源の Attribution Note (Capability Ledger)
 
 §0 Step 6 + §0.1 + §8 Q6 は **Cascade による non-coord 提案** (`responses/2026-05-11_cascade_capability-ledger-proposal.md`, commit `54d5a8e3`, blob `bf65cb05`) を coord が文言整合のみ加えて統合したもの。内容実質の追加・削除・並べ替えは行っていない。
 
 これは IS-2026-038（non-coord AI が prompt file を起案した governance question）と類似の構造を持つが、本件は **substantive proposal（提案）** であり **prompt file 起案ではない** ため、コーディネーション機能の侵害には当たらないと coord 判断した。Cascade は Handoff to Coordinator として明示的に統合権限を coord に委ねており、council プロセスの順序を踏襲している。
 
 ただし、non-coord AI が規律文書（COUNCIL_BOOTSTRAP / AGENTS.md 等）への直接的な改訂提案を出すこと自体は council 構造への影響が大きく、Round 3 で他 reviewer の独立確認を求めるべき事項として Annex B IS-2026-041 に記録する。
+
+### 12.2 v1.3 起源の Attribution Note (Matter Execution Transition)
+
+§1 Role Routing の Cascade Orchestrator 化、§9.2 現行 orchestrator、§11.2 Cascade deployment、§5.2 3-Storage Separation は **Cascade Matter Execution Directive** (`prompts/2026-05-11_to-all-ais_matter-execution-directive.md`, commit `8ed35755`) を outgoing coord (Claude) が integration したもの。
+
+Directive 自体は **prompts/ への直接 commit** であり、IS-2026-038 governance question (Annex B §5.7) で coord-exclusive とされた coordination action に該当する。しかし以下の理由で **operator delegated authority による正当化** が成立:
+
+1. Directive の author field に "Cascade (Windsurf) on behalf of Human Owner (SKG)" と明示
+2. operator (先生) が本セッションで Directive 実行を明示的に endorse（"確認し、必要な改訂作業を実行し、結果を responses/ に報告してください"）
+3. operator は council の ultimate authority であり、coord-exclusive 規律 (§5.7) を上書きする権限を持つ
+4. 結果として **operator-delegated coordination action** として Annex B IS-2026-043 に記録
+
+ただし、本パターン (non-orchestrator AI による operator-delegated prompts/ commit) は council 構造への影響が大きい precedent であり、Round 3 で他 reviewer (Perplexity / Gemini / GPT) の独立確認を求める (IS-2026-042/043 全件)。
 
 ---
 
@@ -470,4 +538,4 @@ You DECLINED Annex A drafting (per Round 2 final review §7); Cascade is the sol
 
 ---
 
-End of COUNCIL_BOOTSTRAP.md v1.2
+End of COUNCIL_BOOTSTRAP.md v1.3
