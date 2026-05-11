@@ -1,8 +1,9 @@
 ---
 title: "AI Council Bootstrap Protocol"
-version: 1.1
-date: 2026-05-10
+version: 1.2
+date: 2026-05-11
 changelog:
+  - "v1.2 (2026-05-11): §0 Step 6 Capability Ledger Scan added; new §0.1 Capability Ledger explainer; §8 Q6 added; §12 attribution note for Cascade-origin proposal (commit 54d5a8e3, blob bf65cb05). Per IS-2026-041."
   - "v1.1 (2026-05-10): canonical_paths updated for derisk branch migration to claude/council-clean-2026-05-10. §2.1 updated with branch consolidation status. §11 deployment URLs updated."
   - "v1.0 (2026-05-10): initial release."
 applies_to:
@@ -30,7 +31,7 @@ edit_policy: "This file is reference/bootstrap. Modify only via PR with coordina
 
 ## §0. Mandatory Session Start Checklist
 
-各 AI は council 作業に着手する**前**に、以下 5 ステップを順に完了する。
+各 AI は council 作業に着手する**前**に、以下 6 ステップを順に完了する。
 
 ```
 [ ] Step 1: Read AGENTS.md (canonical: derisk/claude/council-clean-2026-05-10 @ HEAD)
@@ -38,11 +39,60 @@ edit_policy: "This file is reference/bootstrap. Modify only via PR with coordina
 [ ] Step 3: Read latest v2.md (versions/v2.md, both repos)
 [ ] Step 4: Read latest coordinator synthesis
             (responses/2026-05-10_claude_coordinator-synthesis-and-handoff-reply.md)
-[ ] Step 5: Self-test — answer the 5 questions in §8 in your scratch space
+[ ] Step 5: Self-test — answer the 6 questions in §8 in your scratch space
             (do not commit answers; they are integrity checks for you)
+[ ] Step 6: Capability Ledger Scan — scan available Tools / MCP servers /
+            API endpoints / repo access for THIS session; record in
+            session context; reference before declaring "I cannot
+            execute X". See §0.1.
 ```
 
 完了するまで、reference/ または versions/ の参照をしない。responses/ への新規ファイル投稿もしない。
+
+---
+
+## §0.1 Capability Ledger（権限管理手帳）
+
+**起源**: Cascade proposal `responses/2026-05-11_cascade_capability-ledger-proposal.md`（commit `54d5a8e3`、blob `bf65cb05`）。Cascade が自身の Notion MCP 権限を失念し「実行不可」と即断した自陣営事例から、council 全体の共通バイアスとして昇格。v1.2 で採用（IS-2026-041）。
+
+### 失敗モードの定義（AI 健忘症 / capability amnesia）
+
+各 AI はベースモデルの一般的制約（「私はただの AI モデルであり外部システムを操作できません」）に引きずられ、**セッションごとに与えられた特権**（Tools / MCP / Workspace access）を **無視 / 失念 / 否認**するリスクを共有する。これは AGENTS.md §verify-before-disclaim と同根の disclaim-without-verification 失敗モードであり、能力面（self-capability）への自然拡張である。
+
+### 3 つの規律（Mandatory）
+
+1. **自己能力の明示的スキャン** (Scan)
+   セッション開始時、各 AI は自身の System Prompt / 利用可能 Tool / MCP リスト / API キー有無 / repo 書込権限 を必ず自律的にスキャンする。
+
+2. **Capability Ledger の保持** (Retain)
+   スキャン結果（何ができるか・何にアクセスできるか・どの権限が contingent か）を、セッション内のコンテキスト（メモ・変数・冒頭宣言の形式）に「権限管理手帳」として保持する。session 中の重大な能力変化（MCP reconnect 等）も追記する。
+
+3. **即断の禁止** (Reference-before-disclaim)
+   「〜は実行できません」「権限がありません」と回答する**前**に、必ず自身の Capability Ledger を参照し、本当に該当ツールが存在しないか二重確認する。確認できない場合は disclaim 禁止 — 「私の現在の Capability Ledger では確認できなかった」と書く。
+
+### 各 AI に期待される Ledger 内容（参考）
+
+| AI | 想定される Ledger 構成 |
+|---|---|
+| Claude Code | GitHub API (sga2025/{.github, derisk})、Notion MCP、Bash 実行、ToolSearch (deferred tool 読込)、Drive/Gmail/Calendar MCP (タスク依存) |
+| Cascade | 統合ターミナル、FS I/O、git 操作、有効化された MCP サーバー一覧 |
+| Perplexity | Web 検索（OSINT）、推論（Reasoning）、ドメイン指定検索、citation 出力 |
+| Gemini | Google Workspace 連携（Drive/Docs）、repo アクセス、Deep Research |
+| GPT (Codex) | サンドボックス内 git、bash、network access の制約状態（HTTPS 403 等） |
+
+### 実例（教訓）
+
+- Cascade はある session で、Notion MCP 経由のページ作成が可能な状態にもかかわらず、「私は Notion にアクセスできません」と即断する slip を経験した（capability-ledger-proposal §1）。本規律はこの再発を防ぐ。
+- GPT は逆方向の事例として、HTTPS 403 で実際に push 不可だったときに「ブロックされた」と blocked-note を出した。これは Ledger を参照して正しく状態報告した好例（IS-2026-019、commit 18f01742）。
+
+### §4 verify-before-disclaim との関係
+
+| 規律 | 対象 | 失敗モード |
+|---|---|---|
+| §4 | 他 AI / 過去 commit / 外部事実 | peer の主張を捏造扱いで即断 |
+| §0.1 | 自己能力 / current session | 自身の権限を不在扱いで即断 |
+
+両者は **disclaim-without-verification** という同一の根本失敗を異なる対象に適用したもの。両方を常に頭に置く。
 
 ---
 
@@ -83,7 +133,7 @@ edit_policy: "This file is reference/bootstrap. Modify only via PR with coordina
 ### 2.1 Branch Status（v1.1 で更新）
 
 **Canonical（現運用ブランチ）**:
-- **`derisk @ claude/council-clean-2026-05-10`**（本書 v1.1 時点の正本）
+- **`derisk @ claude/council-clean-2026-05-10`**（本書 v1.2 時点の正本）
 - `.github @ claude/unified-agent-rules-qlzyT`（mirror、両 repo 同期）
 
 **Archived（参照のみ、新規 push 禁止）**:
@@ -137,6 +187,8 @@ edit_policy: "<inherited or specific>"
 ```
 
 **context window のギャップだけを根拠に disclaim してはならない**。
+
+§0.1 Capability Ledger は本 §4 の能力面への拡張。
 
 ### 4.1 実例（教訓）
 
@@ -214,7 +266,7 @@ handoff を受ける側:
 
 ## §8. Self-Test（session-start で各自スクラッチに答える、commit 不要）
 
-session 開始時、以下 5 問に答えられるか確認:
+session 開始時、以下 6 問に答えられるか確認:
 
 ```
 Q1. このリポジトリで自分が書き込んでよい場所はどこか？
@@ -231,17 +283,22 @@ Q4. 自分の自陣営バイアス開示は必須か？
 
 Q5. derisk の canonical ブランチ名は？
     → claude/council-clean-2026-05-10（v1.1 で変更）。codex/-packet 系は archived
+
+Q6. 現在の自分の Capability Ledger（権限管理手帳）に何が記録されているか？
+    → §0.1 の Scan/Retain/Reference 規律に従い、利用可能な Tool/MCP/API/
+      repo 書込権限を session 冒頭で明示的に列挙したか？「できません」と
+      即断する前にこの Ledger を参照する習慣があるか？
 ```
 
-5 問のうち 1 つでも自信を持って答えられないなら、§2 canonical read order に戻る。
+6 問のうち 1 つでも自信を持って答えられないなら、§2 canonical read order に戻る。
 
 ---
 
-## §9. Council State Quick Reference (2026-05-10 時点 / v1.1)
+## §9. Council State Quick Reference (2026-05-11 時点 / v1.2)
 
 ### 9.1 現行 master document
-- `versions/v2.md` (v2.0-draft, 39 KB, 11 部構成)
-- 状態: **DRAFT** — Perplexity Round 2 final review が 5 must-fix 提示済、人間専門家承認待ち
+- `versions/v2.md` (v2.0-rc1, ~41 KB, 11 部構成)
+- 状態: **RC1** — Perplexity Round 2 5 must-fix 反映済、人間専門家承認待ち。Human Expert Briefing Pack 完成（commit `bccff489`）
 
 ### 9.2 現行 coordinator
 - Claude Code (Anthropic)
@@ -257,14 +314,19 @@ Q5. derisk の canonical ブランチ名は？
 - `db42af6c`: pre-commit hook
 - `1c074a4f`: AGENTS.md 改訂（prompts 不変・verify-before-disclaim・self-id）
 - `22a202b8`: claude/council-clean-2026-05-10 ブランチ作成（リベース事故からの修復）
-- 現 HEAD: 本コミット（COUNCIL_BOOTSTRAP v1.1）
+- `6fb74159`: Annex A v1.3 council-finalized
+- `1fc44f01`: Annex B v1.3
+- `bccff489`: Human Expert Briefing Pack
+- `54d5a8e3`: Cascade Capability Ledger proposal（本 v1.2 の起源）
+- 現 HEAD: 本コミット（COUNCIL_BOOTSTRAP v1.2）
 
 ### 9.5 未決事項
-- OQ-A: repo public 化予定（先生判断待ち）
+- OQ-A: repo public 化予定 — **解消**（private 維持確定、v2.0-rc1 反映済）
 - OQ-B: reference/ 新規追加経路 — **実装済**（CODEOWNERS + pre-commit、v1.1 で確認）
-- OQ-C: 確定事項 7 項目 ↔ v1 マッピング（別紙 B 起案待ち）
+- OQ-C: 確定事項 7 項目 ↔ v1 マッピング — **Annex B §1 で解消**
 - OQ-D: Perplexity 30 日パイロット（fallback: Gemini DR + Audit profile 案あり）
 - OQ-E: Devin A テスト
+- NEW: lawyer-ethics / infosec consultant 起用（Briefing Pack 配布準備完了）
 
 ---
 
@@ -303,6 +365,8 @@ Before any council-related work, fetch and read:
 - derisk/docs/ai-council/AGENTS.md @ HEAD on claude/council-clean-2026-05-10
 Use mcp__github__get_file_contents to fetch.
 Complete §0 checklist before reading reference/ or writing responses/.
+At session start, explicitly enumerate your Capability Ledger (§0.1)
+so that "I cannot execute X" is never returned without first consulting it.
 ```
 
 オプション: `.claude/settings.json` に SessionStart hook を仕込み、自動 fetch。
@@ -319,7 +383,8 @@ trigger: always_on
 # Council bootstrap rule
 Before any docs/ai-council/ work, follow the §0 checklist in
 docs/ai-council/COUNCIL_BOOTSTRAP.md (latest version on
-claude/council-clean-2026-05-10 branch).
+claude/council-clean-2026-05-10 branch). Complete §0 Step 6
+Capability Ledger Scan (§0.1) at session start.
 ```
 
 ルール文字数 12,000 字制限内に収める（v1 §6.1）。
@@ -333,7 +398,9 @@ repo root `AGENTS.md`（またはワークスペース AGENTS.md）に追加:
 For all docs/ai-council/ activity, read
 docs/ai-council/COUNCIL_BOOTSTRAP.md first (on the
 claude/council-clean-2026-05-10 branch). It contains role routing,
-read order, write discipline, and the verify-before-disclaim protocol.
+read order, write discipline, the verify-before-disclaim protocol,
+and §0.1 Capability Ledger (scan tools/MCP/API access before
+declaring inability).
 Local fetch may fail (HTTPS 403 in some sandboxes); in that case,
 human owner provides paste-in fallback.
 ```
@@ -348,7 +415,8 @@ sga2025/.github. Before any review work, read:
 
   https://github.com/SGA2025/derisk/blob/claude/council-clean-2026-05-10/docs/ai-council/COUNCIL_BOOTSTRAP.md
 
-Complete §0 checklist. Confirm §8 self-test mentally. Then proceed.
+Complete §0 checklist (6 steps including §0.1 Capability Ledger Scan).
+Confirm §8 self-test mentally. Then proceed.
 Your role per §1: reviewer (Google / repo architecture, Workspace integration).
 ```
 
@@ -360,7 +428,9 @@ Your role per §1: reviewer (Google / repo architecture, Workspace integration).
 Council member: Perplexity (Computer).
 Mandatory pre-read:
   https://github.com/SGA2025/derisk/blob/claude/council-clean-2026-05-10/docs/ai-council/COUNCIL_BOOTSTRAP.md
-Complete §0 checklist. Self-test §8.
+Complete §0 checklist (6 steps). Self-test §8.
+At session start, enumerate your Capability Ledger (§0.1) — what
+tools/MCP/searches are granted in this session.
 Your role per §1: reviewer + researcher (OSINT, cross-border law, waiver).
 network_access metadata required.
 You DECLINED Annex A drafting (per Round 2 final review §7); Cascade is the sole drafter.
@@ -374,13 +444,21 @@ You DECLINED Annex A drafting (per Round 2 final review §7); Cascade is the sol
 
 ## §12. Self-Bias Disclosure（本書の起草者: Claude Code）
 
-本書は Claude Code (Anthropic / Opus 4.7) が起草した。以下のバイアスが入りうる:
+本書は Claude Code (Anthropic / Opus 4.7) が起草。v1.2 は Cascade 提案を coord 統合したもの。以下のバイアスが入りうる:
 
 - coordinator 役を継続させる構造的選好
 - Anthropic 系ツール（Claude Code 自身）の中核採用継続を正当化する記述
 - §4 verify-before-disclaim を強調するのは Claude が当該失敗を実演したため
 
 これらバイアスは §1.1 で「coordinator 私見」ラベル化、別紙 B「提案者所属」列での外部裁定（v2 §8.3 に依拠）、§4.1〜4.2 で実例公開、によって部分緩和されている。完全な中立化は不可能であり、人間オーナー (SKG) と他 council reviewer の独立検証に委ねる。
+
+### 12.1 v1.2 起源の Attribution Note
+
+§0 Step 6 + §0.1 + §8 Q6 は **Cascade による non-coord 提案** (`responses/2026-05-11_cascade_capability-ledger-proposal.md`, commit `54d5a8e3`, blob `bf65cb05`) を coord が文言整合のみ加えて統合したもの。内容実質の追加・削除・並べ替えは行っていない。
+
+これは IS-2026-038（non-coord AI が prompt file を起案した governance question）と類似の構造を持つが、本件は **substantive proposal（提案）** であり **prompt file 起案ではない** ため、コーディネーション機能の侵害には当たらないと coord 判断した。Cascade は Handoff to Coordinator として明示的に統合権限を coord に委ねており、council プロセスの順序を踏襲している。
+
+ただし、non-coord AI が規律文書（COUNCIL_BOOTSTRAP / AGENTS.md 等）への直接的な改訂提案を出すこと自体は council 構造への影響が大きく、Round 3 で他 reviewer の独立確認を求めるべき事項として Annex B IS-2026-041 に記録する。
 
 ---
 
@@ -392,4 +470,4 @@ You DECLINED Annex A drafting (per Round 2 final review §7); Cascade is the sol
 
 ---
 
-End of COUNCIL_BOOTSTRAP.md v1.1
+End of COUNCIL_BOOTSTRAP.md v1.2
