@@ -9,18 +9,18 @@ tags:
   - "#founding-principles"
   - "#english"
 created: 2026-06-20
-version: v1.1 (final, for signing)
+version: v1.2 (final, for signing)
 last_updated: 2026-07-02
-revision_note: Reframed around the founding spirit — free individuals of any nationality pledging, of their own free will, to work for the success of American reindustrialization; nationality de-emphasized throughout
+revision_note: Signers defined as free individuals in support of the universal truths of 1776; preamble now echoes "We hold these truths to be self-evident"
 ---
 
 # Declaration of Reindustrialization
 
-## A Joint Statement by Free Individuals
+## A Joint Statement by Free Individuals in Support of Universal Truths
 
-We, free individuals from many nations of the world, are joined here not by citizenship, but by conviction.
+We, free individuals from many nations of the world, are joined here not by citizenship, but by the universal truths we hold in common.
 
-Two hundred and fifty years ago, in this city, it was declared that all are created equal, endowed with unalienable rights—among them life, liberty, and the pursuit of happiness. That declaration was addressed to no single people; it has always belonged to all who choose freedom. Moved by that founding spirit, and of our own free will, we now join our voices in a common purpose: the success of the reindustrialization of the United States.
+Two hundred and fifty years ago, in this city, certain truths were declared to be self-evident: that all are created equal, and endowed with unalienable rights—among them life, liberty, and the pursuit of happiness. Those truths were addressed to no single people. They are universal, and they belong to all who choose freedom. As people who hold these truths, and of our own free will, we now join our voices in a common purpose: the success of the reindustrialization of the United States.
 
 ## We hold these beliefs:
 
