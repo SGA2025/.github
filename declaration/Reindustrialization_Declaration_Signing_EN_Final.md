@@ -9,16 +9,18 @@ tags:
   - "#founding-principles"
   - "#english"
 created: 2026-06-20
-version: v1.0 (final, for signing)
+version: v1.1 (final, for signing)
 last_updated: 2026-07-02
-revision_note: Final synthesis of v0.2 (signing-friendly) and v0.2 (language-polished), prepared for the July 4, 2026 signing ceremony at the First City Troop, Philadelphia
+revision_note: Reframed around the founding spirit — free individuals of any nationality pledging, of their own free will, to work for the success of American reindustrialization; nationality de-emphasized throughout
 ---
 
 # Declaration of Reindustrialization
 
 ## A Joint Statement by Free Individuals
 
-We, ordinary citizens of the United States, of Japan, and of the wider free world—together with those in China and beyond who hold the same convictions—now join our voices in common purpose.
+We, free individuals from many nations of the world, are joined here not by citizenship, but by conviction.
+
+Two hundred and fifty years ago, in this city, it was declared that all are created equal, endowed with unalienable rights—among them life, liberty, and the pursuit of happiness. That declaration was addressed to no single people; it has always belonged to all who choose freedom. Moved by that founding spirit, and of our own free will, we now join our voices in a common purpose: the success of the reindustrialization of the United States.
 
 ## We hold these beliefs:
 
@@ -34,7 +36,7 @@ And we oppose any course that leaves free societies ever more dependent, in thei
 
 ## We pledge:
 
-- As individuals, to support the reindustrialization of the United States, and a freedom-grounded reindustrialization in our own nations.
+- Of our own free will, and whatever our nationality, to devote our efforts to the success of the reindustrialization of the United States—and, through its success, to the strength of free societies everywhere.
 - To refuse to surrender strategic productive capacity to any regime or entity that systematically violates these principles.
 - To advance cooperation among free societies that is predictable in substance and predictable in manner, reciprocal in the timing and design of its institutions as well as in their eventual outcome, and that genuinely strengthens the independence of every party to it.
 - To teach the generation that follows us that freedom without the capacity to produce—and to compute—what matters most will always be fragile; and to invest patiently in the people, the apprenticeships, and the craftsmanship that such capacity ultimately requires.
@@ -46,19 +48,19 @@ To these words we pledge our names and our honor.
 
 **Signed this Fourth Day of July, 2026**, the Two Hundred and Fiftieth Anniversary of the Declaration of Independence of the United States of America, in the City of Philadelphia, Commonwealth of Pennsylvania, United States of America, at the historic home of the First Troop Philadelphia City Cavalry (the First City Troop), in the birthplace of the nation.
 
-| Name | Country or Region | Date |
-|------|-------------------|------|
-|      |                   |      |
-|      |                   |      |
-|      |                   |      |
-|      |                   |      |
-|      |                   |      |
-|      |                   |      |
-|      |                   |      |
-|      |                   |      |
+| Name | Date |
+|------|------|
+|      |      |
+|      |      |
+|      |      |
+|      |      |
+|      |      |
+|      |      |
+|      |      |
+|      |      |
 
 *(Additional signatures may be added)*
 
 ---
 
-*All signatures are made in a personal capacity only, and bind no government, company, or institution.*
+*All signatures are made of the signer's own free will and in a personal capacity only, and bind no government, company, or institution.*
