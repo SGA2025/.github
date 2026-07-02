@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<office:document xmlns:office="urn:oasis:names:tc:opendocument:xmlns:office:1.0"
+                 xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0"
+                 xmlns:text="urn:oasis:names:tc:opendocument:xmlns:text:1.0"
+                 xmlns:table="urn:oasis:names:tc:opendocument:xmlns:table:1.0"
+                 xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0"
+                 xmlns:svg="urn:oasis:names:tc:opendocument:xmlns:svg-compatible:1.0"
+                 office:version="1.2"
+                 office:mimetype="application/vnd.oasis.opendocument.text">
+  <office:font-face-decls>
+    <style:font-face style:name="Libre Caslon Text" svg:font-family="&apos;Libre Caslon Text&apos;" style:font-family-generic="roman" style:font-pitch="variable"/>
+    <style:font-face style:name="Noto Serif CJK SC" svg:font-family="&apos;Noto Serif CJK SC&apos;" style:font-family-generic="roman" style:font-pitch="variable"/>
+  </office:font-face-decls>
+  <office:styles>
+    <style:default-style style:family="paragraph">
+      <style:text-properties style:font-name="Libre Caslon Text" fo:font-size="14pt" fo:language="en" fo:country="US"
+        style:font-name-asian="Noto Serif CJK SC" style:font-size-asian="14pt" style:language-asian="zh" style:country-asian="CN"/>
+    </style:default-style>
+    <style:style style:name="Standard" style:family="paragraph" style:class="text">
+      <style:paragraph-properties fo:line-height="160%" fo:text-align="justify" fo:margin-bottom="0.14in"/>
+      <style:text-properties style:font-name="Libre Caslon Text" fo:font-size="14pt"
+        style:font-name-asian="Noto Serif CJK SC" style:font-size-asian="14pt"/>
+    </style:style>
+  </office:styles>
+  <office:automatic-styles>
+    <style:page-layout style:name="pm1">
+      <style:page-layout-properties fo:page-width="8.5in" fo:page-height="11in"
+        style:print-orientation="portrait"
+        fo:margin-top="1in" fo:margin-bottom="1in" fo:margin-left="1.15in" fo:margin-right="1.15in"/>
+    </style:page-layout>
+    <style:style style:name="P_Title" style:family="paragraph" style:parent-style-name="Standard">
+      <style:paragraph-properties fo:text-align="center" fo:margin-top="0.15in" fo:margin-bottom="0.12in" fo:line-height="115%"/>
+      <style:text-properties fo:font-size="30pt" style:font-size-asian="30pt" fo:letter-spacing="0.08in"/>
+    </style:style>
+    <style:style style:name="P_Subtitle" style:family="paragraph" style:parent-style-name="Standard">
+      <style:paragraph-properties fo:text-align="center" fo:margin-bottom="0.30in"/>
+      <style:text-properties fo:font-size="15pt" style:font-size-asian="15pt"/>
+    </style:style>
+    <style:style style:name="P_Body" style:family="paragraph" style:parent-style-name="Standard">
+      <style:paragraph-properties fo:text-align="justify" fo:margin-bottom="0.14in" fo:line-height="160%"/>
+      <style:text-properties fo:font-size="14pt" style:font-size-asian="14pt"/>
+    </style:style>
+    <style:style style:name="P_Heading" style:family="paragraph" style:parent-style-name="Standard">
+      <style:paragraph-properties fo:margin-top="0.18in" fo:margin-bottom="0.10in"/>
+      <style:text-properties fo:font-size="15pt" style:font-size-asian="15pt" fo:font-weight="bold" style:font-weight-asian="bold"/>
+    </style:style>
+    <style:style style:name="P_Bullet" style:family="paragraph" style:parent-style-name="Standard">
+      <style:paragraph-properties fo:text-align="justify" fo:margin-left="0.45in" fo:text-indent="-0.25in" fo:margin-bottom="0.10in" fo:line-height="160%"/>
+      <style:text-properties fo:font-size="14pt" style:font-size-asian="14pt"/>
+    </style:style>
+    <style:style style:name="P_Closing" style:family="paragraph" style:parent-style-name="Standard">
+      <style:paragraph-properties fo:text-align="center" fo:margin-top="0.22in" fo:margin-bottom="0.22in"/>
+      <style:text-properties fo:font-size="15pt" style:font-size-asian="15pt" fo:font-weight="bold" style:font-weight-asian="bold"/>
+    </style:style>
+    <style:style style:name="P_Sep" style:family="paragraph" style:parent-style-name="Standard">
+      <style:paragraph-properties fo:text-align="center" fo:margin-top="0.10in" fo:margin-bottom="0.10in"/>
+      <style:text-properties fo:font-size="14pt" style:font-size-asian="14pt"/>
+    </style:style>
+    <style:style style:name="P_Note" style:family="paragraph" style:parent-style-name="Standard">
+      <style:paragraph-properties fo:text-align="center" fo:margin-top="0.10in"/>
+      <style:text-properties fo:font-size="11pt" style:font-size-asian="11pt"/>
+    </style:style>
+    <style:style style:name="P_TableText" style:family="paragraph" style:parent-style-name="Standard">
+      <style:paragraph-properties fo:text-align="left" fo:margin-top="0.16in" fo:margin-bottom="0.02in"/>
+      <style:text-properties fo:font-size="13pt" style:font-size-asian="13pt"/>
+    </style:style>
+    <style:style style:name="P_TableHead" style:family="paragraph" style:parent-style-name="Standard">
+      <style:paragraph-properties fo:text-align="left" fo:margin-bottom="0.04in"/>
+      <style:text-properties fo:font-size="13pt" style:font-size-asian="13pt"/>
+    </style:style>
+    <style:style style:name="T_Bold" style:family="text">
+      <style:text-properties fo:font-weight="bold" style:font-weight-asian="bold"/>
+    </style:style>
+    <style:style style:name="SigTable" style:family="table">
+      <style:table-properties style:width="6.2in" table:align="center" style:may-break-between-rows="false"/>
+    </style:style>
+    <style:style style:name="SigTable.ColName" style:family="table-column">
+      <style:table-column-properties style:column-width="3.9in"/>
+    </style:style>
+    <style:style style:name="SigTable.ColGap" style:family="table-column">
+      <style:table-column-properties style:column-width="0.4in"/>
+    </style:style>
+    <style:style style:name="SigTable.ColDate" style:family="table-column">
+      <style:table-column-properties style:column-width="1.9in"/>
+    </style:style>
+    <style:style style:name="SigTable.CellLine" style:family="table-cell">
+      <style:table-cell-properties fo:border-bottom="0.5pt solid #000000" fo:padding-left="0.05in" fo:padding-right="0.15in" fo:padding-bottom="0.02in"/>
+    </style:style>
+    <style:style style:name="SigTable.CellHead" style:family="table-cell">
+      <style:table-cell-properties fo:padding-left="0.05in" fo:padding-right="0.15in"/>
+    </style:style>
+  </office:automatic-styles>
+  <office:master-styles>
+    <style:master-page style:name="Standard" style:page-layout-name="pm1"/>
+  </office:master-styles>
+  <office:body>
+    <office:text>
+      <text:p text:style-name="P_Title">再工业化宣言</text:p>
+      <text:p text:style-name="P_Subtitle">支持普遍真理的自由个人联合声明</text:p>
+      <text:p text:style-name="P_Body">我们是来自世界许多国家的自由个人。将我们联结于此的,不是国籍,而是我们共同持守的普遍真理。</text:p>
+      <text:p text:style-name="P_Body">二百五十年前,在这座城市,若干真理被宣告为不言而喻:人人生而平等,并被赋予若干不可剥夺的权利,其中包括生命权、自由权和追求幸福的权利。这些真理并非仅对某一个民族而宣告。它们是普遍的,属于一切选择自由的人。作为持守这些真理的人,我们本于自己的自由意志,如今为一个共同的目标同声宣告:美国再工业化的成功。</text:p>
+      <text:p text:style-name="P_Heading">我们确信:</text:p>
+      <text:p text:style-name="P_Bullet">•<text:tab/>追求幸福的权利,建立在从事真实、有尊严、有生产性的工作的自由之上。</text:p>
+      <text:p text:style-name="P_Bullet">•<text:tab/>一个自由的民族,必须把最关乎其生存的生产能力握在自己手中——不仅在战时,也在平时。</text:p>
+      <text:p text:style-name="P_Bullet">•<text:tab/>自由社会不能仅靠金钱与政策存续;它有赖于一代又一代以把东西做好为荣、把工匠精神视为荣誉的人。</text:p>
+      <text:p text:style-name="P_Bullet">•<text:tab/>自由社会之间的合作,必须使每一方更加自立,而绝不使任何一方更加依附于他者。</text:p>
+      <text:p text:style-name="P_Bullet">•<text:tab/>把我们最关键的生产能力交到既不尊重个人权利、也不尊重可预期规则的政权或实体手中,无异于为自己铸造无形的枷锁。</text:p>
+      <text:p text:style-name="P_Body">今天,美国正与志同道合的伙伴一道,在半导体、关键矿产、能源、造船、先进计算基础设施,以及其他真正关乎国家安全与人民生计的领域,重建真实的生产能力。我们支持这一方向和这些原则——它不属于任何一届政府,也远未完成。</text:p>
+      <text:p text:style-name="P_Body">我们反对任何使自由社会在其核心能力上,对违背上述原则者日益依赖的道路。</text:p>
+      <text:p text:style-name="P_Heading">我们承诺:</text:p>
+      <text:p text:style-name="P_Bullet">•<text:tab/>本于自由意志,不论国籍,为美国再工业化的成功贡献力量——并通过它的成功,增进世界各地自由社会的力量。</text:p>
+      <text:p text:style-name="P_Bullet">•<text:tab/>拒绝把战略性生产能力拱手让给任何系统性违背这些原则的政权或实体。</text:p>
+      <text:p text:style-name="P_Bullet">•<text:tab/>推动自由社会之间的合作:在实质上可预期,在方式上亦可预期;不仅在最终结果上对等,在制度安排的时机与设计上也对等;并真正增强每一个参与方的自立。</text:p>
+      <text:p text:style-name="P_Bullet">•<text:tab/>教导继我们而来的世代:没有能力去生产——以及去计算——最重要之物的自由,终究是脆弱的;并为这种能力最终所需要的人才、学徒传承与工匠技艺,进行耐心的投资。</text:p>
+      <text:p text:style-name="P_Bullet">•<text:tab/>铭记汉密尔顿的教诲:国家供给之要与公共信用互为一体;支持再工业化,与支持财政纪律不可分割。</text:p>
+      <text:p text:style-name="P_Closing">我们以自己的姓名与荣誉,为这些话语作证。</text:p>
+      <text:p text:style-name="P_Sep">✦  ✦  ✦</text:p>
+      <text:p text:style-name="P_Body"><text:span text:style-name="T_Bold">签署于公元2026年7月4日</text:span>,美利坚合众国《独立宣言》发表二百五十周年之日,于美利坚合众国宾夕法尼亚州费城——建国之地,费城第一市骑兵队(First Troop Philadelphia City Cavalry,通称 First City Troop)的历史驻地。</text:p>
+      <table:table table:name="Signatures" table:style-name="SigTable">
+        <table:table-column table:style-name="SigTable.ColName"/>
+        <table:table-column table:style-name="SigTable.ColGap"/>
+        <table:table-column table:style-name="SigTable.ColDate"/>
+        <table:table-row>
+          <table:table-cell table:style-name="SigTable.CellHead" office:value-type="string"><text:p text:style-name="P_TableHead">姓名</text:p></table:table-cell>
+          <table:table-cell table:style-name="SigTable.CellHead" office:value-type="string"><text:p text:style-name="P_TableHead"/></table:table-cell>
+          <table:table-cell table:style-name="SigTable.CellHead" office:value-type="string"><text:p text:style-name="P_TableHead">日期</text:p></table:table-cell>
+        </table:table-row>
+        <table:table-row>
+          <table:table-cell table:style-name="SigTable.CellLine" office:value-type="string"><text:p text:style-name="P_TableText"/></table:table-cell>
+          <table:table-cell table:style-name="SigTable.CellHead" office:value-type="string"><text:p text:style-name="P_TableText"/></table:table-cell>
+          <table:table-cell table:style-name="SigTable.CellLine" office:value-type="string"><text:p text:style-name="P_TableText"/></table:table-cell>
+        </table:table-row>
+        <table:table-row>
+          <table:table-cell table:style-name="SigTable.CellLine" office:value-type="string"><text:p text:style-name="P_TableText"/></table:table-cell>
+          <table:table-cell table:style-name="SigTable.CellHead" office:value-type="string"><text:p text:style-name="P_TableText"/></table:table-cell>
+          <table:table-cell table:style-name="SigTable.CellLine" office:value-type="string"><text:p text:style-name="P_TableText"/></table:table-cell>
+        </table:table-row>
+        <table:table-row>
+          <table:table-cell table:style-name="SigTable.CellLine" office:value-type="string"><text:p text:style-name="P_TableText"/></table:table-cell>
+          <table:table-cell table:style-name="SigTable.CellHead" office:value-type="string"><text:p text:style-name="P_TableText"/></table:table-cell>
+          <table:table-cell table:style-name="SigTable.CellLine" office:value-type="string"><text:p text:style-name="P_TableText"/></table:table-cell>
+        </table:table-row>
+        <table:table-row>
+          <table:table-cell table:style-name="SigTable.CellLine" office:value-type="string"><text:p text:style-name="P_TableText"/></table:table-cell>
+          <table:table-cell table:style-name="SigTable.CellHead" office:value-type="string"><text:p text:style-name="P_TableText"/></table:table-cell>
+          <table:table-cell table:style-name="SigTable.CellLine" office:value-type="string"><text:p text:style-name="P_TableText"/></table:table-cell>
+        </table:table-row>
+        <table:table-row>
+          <table:table-cell table:style-name="SigTable.CellLine" office:value-type="string"><text:p text:style-name="P_TableText"/></table:table-cell>
+          <table:table-cell table:style-name="SigTable.CellHead" office:value-type="string"><text:p text:style-name="P_TableText"/></table:table-cell>
+          <table:table-cell table:style-name="SigTable.CellLine" office:value-type="string"><text:p text:style-name="P_TableText"/></table:table-cell>
+        </table:table-row>
+        <table:table-row>
+          <table:table-cell table:style-name="SigTable.CellLine" office:value-type="string"><text:p text:style-name="P_TableText"/></table:table-cell>
+          <table:table-cell table:style-name="SigTable.CellHead" office:value-type="string"><text:p text:style-name="P_TableText"/></table:table-cell>
+          <table:table-cell table:style-name="SigTable.CellLine" office:value-type="string"><text:p text:style-name="P_TableText"/></table:table-cell>
+        </table:table-row>
+        <table:table-row>
+          <table:table-cell table:style-name="SigTable.CellLine" office:value-type="string"><text:p text:style-name="P_TableText"/></table:table-cell>
+          <table:table-cell table:style-name="SigTable.CellHead" office:value-type="string"><text:p text:style-name="P_TableText"/></table:table-cell>
+          <table:table-cell table:style-name="SigTable.CellLine" office:value-type="string"><text:p text:style-name="P_TableText"/></table:table-cell>
+        </table:table-row>
+        <table:table-row>
+          <table:table-cell table:style-name="SigTable.CellLine" office:value-type="string"><text:p text:style-name="P_TableText"/></table:table-cell>
+          <table:table-cell table:style-name="SigTable.CellHead" office:value-type="string"><text:p text:style-name="P_TableText"/></table:table-cell>
+          <table:table-cell table:style-name="SigTable.CellLine" office:value-type="string"><text:p text:style-name="P_TableText"/></table:table-cell>
+        </table:table-row>
+      </table:table>
+      <text:p text:style-name="P_Note">(签名可继续增列)</text:p>
+      <text:p text:style-name="P_Sep">✦  ✦  ✦</text:p>
+      <text:p text:style-name="P_Note">所有签名均出于签署人本人的自由意志,仅以个人身份作出,不约束任何政府、公司或机构。</text:p>
+    </office:text>
+  </office:body>
+</office:document>
